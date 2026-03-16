@@ -180,6 +180,7 @@ channels: # starts a list of channels. Every channel below begins with a "-" as 
   name: weather
   iframe: # You can load up external websites using the IFrame engine
     src: https://mwood77.github.io/ws4kp-international/?hazards-checkbox=true&current-weather-checkbox=true&latest-observations-checkbox=true&hourly-checkbox=false&hourly-graph-checkbox=true&travel-checkbox=false&regional-forecast-checkbox=true&local-forecast-checkbox=true&extended-forecast-checkbox=true&almanac-checkbox=true&radar-checkbox=true&marine-forecast-checkbox=true&aqi-forecast-checkbox=false&custom-weather-station-checkbox=false&settings-experimentalFeatures-checkbox=false&settings-hideWebamp-checkbox=true&settings-kiosk-checkbox=true&settings-scanLines-checkbox=false&settings-wide-checkbox=false&chkAutoRefresh=true&settings-windUnits-select=2.00&settings-marineWindUnits-select=1.00&settings-marineWaveHeightUnits-select=1.00&settings-temperatureUnits-select=1.00&settings-distanceUnits-select=1.00&settings-pressureUnits-select=1.00&settings-hoursFormat-select=2.00&settings-speed-select=1.00&latLonQuery=Helsinki+Airport%2C+Vantaa%2C+FIN&latLon=%7B%22lat%22%3A60.3172%2C%22lon%22%3A24.9633%7D # Required. The URL to load
+    aspectRatioBehavior: contain
     allowInteraction: true # Optional. If specified you can use your mouse or keyboard to interact with the IFrame.
 
 
