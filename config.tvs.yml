@@ -1,0 +1,192 @@
+# yaml-language-server: $schema=https://gcpw.art/tvs/schemas/5.9.0.json
+
+# Documented configuration file.
+# Data that is required will be denoted as such. Anything that isn't required can be commented out / removed.
+# More options are available than are in this file, and links are provided to relevant parts of the documentation.
+
+##### VISUAL EFFECTS #####
+# REFERENCE:
+# https://greenhillplaza.notion.site/Visual-Effects-68ae52d438344b9598cd4ac86cc2a0e5
+#
+# These options control the picture and the window.
+##########################
+
+applicationTitle: Television Simulator Public Beta # Optional. The title of the webpage; make it your own!
+scanlines: true # Optional. Scanlines are enabled by default but if you don't want them you can set this to false. On a real CRT it's best to disable these and shadow masks.
+shadowMask: aperture-grille # Optional. The default shadow mask to simulate a CRT screen. Values are slot-mask, dot-mask, or aperture-grille. To disable, set to false.
+noise: 0.15 # Optional. Default amount of picture noise to apply
+blur: 1 # Optional. Default amount of blur to apply to the picture; set to false to disable
+bezel: flat # Optional. You can specify a bezel image to go around the outside of the screen. Values are none, cylindrical or flat.
+# animateChannelChange: false # Optional. By default the TV will shake the screen a bit when changing channels. If you want to disable this set to false.
+# changeChannelNoise: false # Optional. By default the TV will add noise to the picture when changing channels. If you want to disable this set to false.
+# autoScale: false # Optional. By default the TV will scale to fit the window. If you want to disable this set to false.
+# border: placeholders/border.png # Optional. You can specify a repeating pattern a background image around the outside of the screen
+# warmup: false # Optional. By default the TV will warm up and cool down when you power it on and off. If you want to disable this set to false. If set to a number, it will be the duration of the warmup in seconds.
+
+# Uncomment the lines below to use the digital cable box theme instead of the default on-screen displays
+# osd:
+#   theme: digital
+#   primaryColor: "#00FFFC"
+#   accentColor: "#F600FF"
+
+# Uncomment the lines below to use the Sat1992 theme inspired by early-90s C-band satellite TV
+# osd:
+#   theme: sat1992 # 1990's analog C-band satellite receiver theme
+#   themeOptions:
+#     # showChannelInterference: false # by default, we display overlays of interference when tuning to a new channel. Set this to false to disable those.
+#     satellite: C1 # the default satellite for all channels to be on. If unset, only channels with a satellite option set will display one.
+#     satellites: # you can define a list of different satellites; they'll be a letter and number combination followed by a 4-digit number representing the location in the sky
+#       C1: 3600 # these are all arbitrary numbers
+#       C3: 4100
+#       C4: 4300
+#       C5: 4550
+#       G1: 4550
+#       G2: 4700
+#       G3: 5100
+#       G4: 6200
+#       T3: 6900
+
+# Uncomment the lines below to use the Sat2007 theme inspired by mid-2000 satellite TV
+# osd:
+#   theme: sat2007
+#   # primaryColor: "rebeccapurple" # Optional color overrides
+#   # accentColor: "white"
+#   # aspectRatioBehavior: stretch # Optional. The aspect ratio behavior of the screen. Values are stretch, letterbox, or hybrid. Defaults to hybrid.
+#   themeOptions: # certain themes have additional options that can be set like this:
+#     showMessageIcon: true # Show the message icon in the top bar
+#     showChannelLockIcon: true # Show the channel lock icon in the top bar
+
+# Uncomment the lines below to use the Sat2012 theme inspired by mid-2010 satellite TV
+# osd:
+#   theme: sat2012
+#   aspectRatioBehavior: stretch # Optional. The aspect ratio behavior of the screen. Values are stretch, letterbox, or hybrid. Defaults to hybrid.
+#   # primaryColor: red
+#   # accentColor: black
+#   themeOptions: # certain themes have additional options that can be set like this:
+#     # providerLogo: placeholders/no-signal.png # Optional. The provider logo to show in the info OSD. If commented out or not set the default logo will be shown. If set to false no logo will be shown.
+#     extraMenuItemsBefore: # Non-functional extra menu items can be added for asthetic purposes.
+#       - Messages
+#     extraMenuItemsAfter: # More non-functional menu items.
+#       - CC
+#       - Last 4
+#       - Favorites
+#       - Audio/Video
+#       - Parental
+
+# osd: false # You can disable the on-screen displays entirely by setting this to false.
+
+# You can also disable parts of the OSD individually. The following options are available:
+# osd:
+#   tuner: false # You can disable the tuner OSD by setting this to false.
+#   info: false # You can disable the info OSD by setting this to false.
+#   receiver: false # You can disable the receiver OSD by setting this to false.
+
+# Screen dimensions defaults can be overridden here. If you don't specify these the TV will be 640x480 by default.
+# Not all channel content will scale to fit the screen; some content will always render at its native resolution (640x480)
+# **Note**: If you change these values, be sure to reset your picture settings using `alt + r` or you won't see the changes.
+# dimensions:
+#   screenWidth: 1280 # Optional. The width of the screen in pixels.
+#   screenHeight: 720 # Optional. The height of the screen in pixels.
+#   # scaleX: 100 # Optional. The scale of the screen percentage-wise on the X axis. Default is 100.
+#   # scaleY: 100 # Optional. The scale of the screen percentage-wise on the Y axis. Default is 100.
+
+# inputMapping: # Optional. You can override the default keyboard commands here.
+#   volumeUp: q # For any key you override, the default key will be unassigned.
+#   volumeDown: a # The combos supported should be in lower-case; the keys supported can be found at https://github.com/madrobby/keymaster?tab=readme-ov-file#supported-keys
+#   power: shift+p, enter # Using + will require multiple keys to be pressed at the same time. Using , will assign multiple combos to the same function.
+#   # Important: the browser may have some reserved key combos that can't be overridden. If you're having trouble with a key combo, try another one.
+
+# persistCurrentChannel: localstorage # Optional. By default TVS will change the active URL to include the current channel when manually changed. Other options are: localstorage, url, or false to disable.
+
+# startup: # Optional. You can specify content to show when the TV is first powered on before going to the default channel.
+#   content: # Required. The content to show on startup.
+#     video: placeholders/hypercom-boot.mp4 # This can be any content engine; in this case it's a video.
+#   duration: 3 # Required if the content engine doesn't support end detection. This is the duration in seconds to show the startup content before going to the channels.
+#               # Setting duration to 0 will make the startup content play *indefinitely* until interrupted by the user changing the channel or powering off the TV.
+#   displayOnPageLoad: true # Optional. By default the startup content will show when the page is loaded. If you want to disable this set to false.
+#   displayOnPowerOn: true # Optional. By default the startup content will show when the TV is powered on using the power button. If you want to disable this set to false.
+
+##### Webhooks #####
+# You can set up webhooks to send data to external services when certain events happen, for the purpose of automation or integration.
+# All requests are sent as GET requests with query parameters.
+# This is for you to receive data *from* TVS only; you can't send data to TVS with these.
+# webhooks: # Optional. You can set up webhooks to send data to external services when certain events happen.
+#   channelChange: http://your-server/receive_update?channel={channel}&manual={isManualInput} # Optional. This is the URL that will be called when the channel changes. The channel number and whether it was a manual input will be sent as query parameters.
+#   volumeChange: http://your-server/receive_update?volume={volume} # Optional. This is the URL that will be called when the volume changes. The volume level will be sent as a query parameter.
+#   muteChange: http://your-server/receive_update?isMuting={isMuting} # Optional. This is the URL that will be called when the muting or unmuting. The mute state will be sent as a query parameter.
+
+refs: # Optional. You can define content here that can be reused in multiple places. This is useful for things like an ad that you want to show on multiple channels. @since 5.1.0
+  ad1: # This is a reference to an ad that can be used in multiple places.
+    image:
+      src: placeholders/example-ad.webp # The image to show for the ad.
+  
+  intro: # This is a reference to an intro that can be used in multiple places.
+    video: placeholders/tvs-intro-sd.m4v # The video to show for the intro.
+  
+  ad2:
+    mix:
+      a:
+        ref: ad1 # You can use references inside other references; but be careful of circular references!
+        mixMode: difference
+      b:
+        ref: intro
+        mixMode: exclusion
+  
+  loop-1:
+    loop:
+      shuffle: random
+      limit: 1
+      content:
+      - image: placeholders/sequence/1.jpg
+        duration: 3
+      - image: placeholders/sequence/2.jpg
+        duration: 3
+  
+  loop-2:
+    loop:
+      shuffle: random
+      limit: 2
+      content:
+      - image: placeholders/sequence/3.jpg
+        duration: 3
+      - image: placeholders/sequence/4.jpg
+        duration: 3
+      - image: placeholders/sequence/5.jpg
+        duration: 3
+
+##### CHANNELS #####
+# REFERENCE:
+# https://greenhillplaza.notion.site/Television-Simulator-99-c28584f069b94f58a71b5c9fe2484dcb#8969cd7aff0e4d569efa77b15cbacf51
+#
+# The rest of this file is about defining a channel lineup.
+####################
+
+# noSignalContent: # Optional. You can specify content to show when a channel is off the air.
+#   image: placeholders/no-signal.png
+
+defaultChannel: 2 # Required. The default channel to start on when visiting the page.
+
+channels: # starts a list of channels. Every channel below begins with a "-" as that lets YAML know we're defining a list.
+
+- number: 1 # Required. Every channel needs a unique number. Negative numbers indicate line inputs, so -1 will be displayed as "LINE 1". Channel 0 is displayed as the TV's "MENU".
+  name: Guide 1989
+  noiseBlendMode: multiply
+  guide:
+    theme: "1989" # You can specify a theme for the guide; this will change the colors and fonts used in the guide.
+    themeOptions: # Some themes have extra settings that can only be applied in these themes.
+      title: Cable TV Guide # Optional. A title to show at the top of the guide
+- number: 100
+  abbr: TWC
+  name: weather
+  iframe: # You can load up external websites using the IFrame engine
+    src: https://mwood77.github.io/ws4kp-international/?hazards-checkbox=true&current-weather-checkbox=true&latest-observations-checkbox=true&hourly-checkbox=false&hourly-graph-checkbox=true&travel-checkbox=false&regional-forecast-checkbox=true&local-forecast-checkbox=true&extended-forecast-checkbox=true&almanac-checkbox=true&radar-checkbox=true&marine-forecast-checkbox=true&aqi-forecast-checkbox=false&custom-weather-station-checkbox=false&settings-experimentalFeatures-checkbox=false&settings-hideWebamp-checkbox=true&settings-kiosk-checkbox=truee&settings-scanLines-checkbox=false&settings-wide-checkbox=false&chkAutoRefresh=true&settings-windUnits-select=2.00&settings-marineWindUnits-select=1.00&settings-marineWaveHeightUnits-select=1.00&settings-temperatureUnits-select=1.00&settings-distanceUnits-select=1.00&settings-pressureUnits-select=1.00&settings-hoursFormat-select=2.00&settings-speed-select=1.00&latLonQuery=Helsinki+Airport%2C+Vantaa%2C+FIN&latLon=%7B%22lat%22%3A60.3172%2C%22lon%22%3A24.9633%7D # Required. The URL to load
+    allowInteraction: true # Optional. If specified you can use your mouse or keyboard to interact with the IFrame.
+
+
+
+
+
+
+
+# In YAML the indentation of things matters; keep it consistent and you should be good. In this file I'm using two spaces for tabs. Your editor may do things differently so watch out for that!
+
