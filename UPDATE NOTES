@@ -1,3 +1,117 @@
+# Update Notes - 5.9.1 (2026-03-15)
+
+## 🔧 Bug Fixes
+
+* Fixed [#113](https://github.com/zshall/program-guide/issues/113); the `<marquee>` tag is broken in Chrome 146, so I switched to a custom implementation. This runs at 60 FPS and behaves similarly to the real marquee tag. Currently it is only available in the `1989` program guide theme, but it'll be used in upcoming engines as well.
+
+# Update Notes - 5.9.0 (2026-03-09)
+
+## ✨ New Features
+
+* Added new `sat1992` OSD theme based on C-Band satellite TV from the early 90's. This theme brings with it some interesting customization options; true to the way the real receivers work, we simulate a satellite dish on a motorized base. You can optionally define a list of known satellites with positions based on motor pulses (these values can be any arbitrary number). You can then define `themeOptions` in individual channels to specify the satellite that the picture would be received from. When you go to a channel that uses a different satellite than the one that you were on previously, the simulated motor will display progress saying it's turning to the position that you specified.
+
+```yml
+osd:
+  theme: sat1992 # 1990's analog C-band satellite receiver theme
+  themeOptions:
+    # showChannelInterference: false # by default, we display overlays of 
+    satellite: C1 # the default satellite for all channels to be on. If unset, only channels with a satellite option set will display one.
+    satellites: # you can define a list of different satellites; they'll be a letter and number combination followed by a 4-digit number representing the location in the sky
+      C1: 3600 # these are all arbitrary numbers
+      C3: 4100
+      C4: 4300
+      C5: 4550
+      G1: 4550
+      G2: 4700
+      G3: 5100
+      G4: 6200
+      T3: 6900
+
+channels:
+- number: 1
+  name: Test Channel
+  color: blue
+  themeOptions: # optional section for theme-specific metadata
+    satellite: C3 # you can designate a channel as being on a particular satellite; choose from the list you defined in the OSD themes
+
+- number: 2
+  name: Test Channel 2
+  color: red
+  themeOptions:
+    satellite: G2
+
+- number: 3
+  name: Test Channel 3
+  color: green # if a channel doesn't specify a satellite, it defaults to the one specified in the OSD options, or no satellite if one isn't specified there either
+```
+
+* Added a new `abstract-background` engine, which can currently apply two different visual effects to an image of your choice; `wave1` and `wave2`.
+
+```yml
+- number: 143
+  name: Abstract background 1
+  abstract-background:
+    type: wave1
+
+- number: 144
+  name: Abstract background 2
+  abstract-background:
+    type: wave2
+
+- number: 145
+  name: Abstract background with custom image
+  abstract-background:
+    src: placeholders/example-program.webp
+    type: wave2
+    width: 400
+    height: 300
+```
+
+# Update Notes - 5.8.0 (2026-02-09)
+
+## ✨ New Features
+
+* Added new `daily-schedule` engine that allows you to specify content to show at different times of the day. Acts as a timed loop (using your browser's time zone).
+* Added `pixelated` option to the `image` engine that allows you to use pixelated scaling when the image is scaled up, which can be desirable for low-resolution images or pixel art.
+
+~~~yml
+- number: 240
+  name: Daily Schedule
+  abbr: SCHED
+  daily-schedule: # The daily schedule engine allows you to define content based on a 24-hour schedule. You can go overnight, but you can't overlap content. The schedule will repeat each day.
+    noSignalContent: # Optional. You can specify content to show when there's nothing else scheduled.
+      color: black
+    
+    content:
+    - startTime: "20:00" # Time to start this item, in 24 hour format. Required.
+      endTime: "05:00" # Time to end this item, in 24 hour format. Required.
+      image: # The content to show. Required.
+        src: placeholders/schedule-night.png
+        pixelated: true
+
+    - startTime: "05:00"
+      endTime: "11:00"
+      image:
+        src: placeholders/schedule-morning.png
+        pixelated: true
+    
+    - startTime: "11:00"
+      endTime: "20:00"
+      image:
+        src: placeholders/schedule-day.png
+        pixelated: true
+~~~
+
+## 🔧 Bug Fixes
+
+* Fixed an issue where content inside loops couldn't access channel information.
+
+# Update Notes - 5.7.3 (2026-01-17)
+
+## 🔧 Bug Fixes
+
+* Fixed an issue with Docker deployments where the example config file wasn't included in the image.
+
 # Update Notes - 5.7.2 (2026-01-15)
 
 ## 🔧 Bug Fixes
